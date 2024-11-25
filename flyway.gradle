@@ -1,0 +1,9 @@
+flyway {
+    driver = db.driver
+    url = db.url
+    user = db.user
+    password = db.password
+    schemas = [db.schema]
+//    baselineOnMigrate = true
+//    baselineVersion = 0
+}

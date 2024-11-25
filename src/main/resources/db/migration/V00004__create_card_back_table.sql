@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS card_back
+(
+    card_id VARCHAR(36) NOT NULL REFERENCES card(id) ON DELETE CASCADE,
+    name VARCHAR(36) NOT NULL,
+    content VARCHAR(36) NOT NULL,
+    PRIMARY KEY(card_id, name)
+)

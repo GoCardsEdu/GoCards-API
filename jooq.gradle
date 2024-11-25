@@ -1,0 +1,34 @@
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-jooq'
+    implementation 'org.jooq:jooq:3.19.15'
+    implementation 'org.jooq:jooq-meta:3.19.15'
+    implementation 'org.jooq:jooq-codegen:3.19.15'
+    jooqCodegen 'org.postgresql:postgresql'
+}
+
+jooq {
+    configuration {
+        jdbc {
+            url = db.url
+            user = db.user
+            password = db.password
+            driver = db.driver
+        }
+        generator {
+            database {
+                inputSchema = db.schema
+            }
+            target {
+                packageName = db.packageName
+            }
+        }
+    }
+}
+
+tasks.named("compileJava") {
+    dependsOn(tasks.named("jooqCodegen"))
+}
+
+tasks.named("jooqCodegen") {
+    dependsOn(tasks.named("flywayMigrate"))
+}
